@@ -4,14 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d868c4d7-6cd8-495a-abff-730ea5ad7227" name="Changes" comment="" />
+    <list default="true" id="d868c4d7-6cd8-495a-abff-730ea5ad7227" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/executionHistory/executionHistory.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/executionHistory/executionHistory.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/fileHashes.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/controller/CajaReporteController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/controller/CajaReporteController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/controller/InventarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/controller/InventarioController.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="41" />
+    <option name="cachedIndexableFilesCount" value="43" />
   </component>
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
@@ -49,29 +60,32 @@
       </state>
     </system>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
   </component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0" />
-      <entry key="M10" value="1.0" />
-      <entry key="M15" value="1.0" />
-      <entry key="M30" value="1.0" />
-      <entry key="H1" value="1.0" />
-      <entry key="H2" value="1.0" />
-      <entry key="H4" value="1.0" />
-      <entry key="D1" value="1.0" />
-      <entry key="W1" value="1.0" />
+      <entry key="MS100" value="1.9052383034050442" />
+      <entry key="MS500" value="3.643084054745272" />
+      <entry key="S2" value="4.5821075003602" />
+      <entry key="S5" value="4.825187147032684" />
+      <entry key="S10" value="4.91125807503405" />
+      <entry key="S30" value="5.021418360294056" />
+      <entry key="S60" value="6.189405467680001" />
+      <entry key="M2" value="10.948316549866268" />
+      <entry key="M5" value="20.670978214958733" />
+      <entry key="M10" value="26.673678745665715" />
+      <entry key="M15" value="29.15211684563268" />
+      <entry key="M30" value="31.916451272894815" />
+      <entry key="H1" value="33.4160933867991" />
+      <entry key="H2" value="34.19722104817638" />
+      <entry key="H4" value="34.595866642237205" />
+      <entry key="D1" value="34.93226012265027" />
+      <entry key="W1" value="34.990313420483524" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -93,23 +107,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.19479114491512495" />
-      <entry key="MS500" value="0.7209644357301124" />
-      <entry key="S2" value="0.921464186198704" />
-      <entry key="S5" value="0.9678128502438443" />
-      <entry key="S10" value="0.9837747965077396" />
-      <entry key="S30" value="0.9945620814795647" />
-      <entry key="S60" value="0.9972773342854858" />
-      <entry key="M2" value="0.9986377392655886" />
-      <entry key="M5" value="0.9994548728537817" />
-      <entry key="M10" value="0.9997273992713122" />
-      <entry key="M15" value="0.999818257923079" />
-      <entry key="M30" value="0.9999091248323915" />
-      <entry key="H1" value="0.9999545613838619" />
-      <entry key="H2" value="0.9999772804338416" />
-      <entry key="H4" value="0.9999886401523977" />
-      <entry key="D1" value="0.9999981066831047" />
-      <entry key="W1" value="0.9999997295259383" />
+      <entry key="MS100" value="1.7493388119048583" />
+      <entry key="MS500" value="3.5663182506427664" />
+      <entry key="S2" value="4.557418865022342" />
+      <entry key="S5" value="4.81476365480098" />
+      <entry key="S10" value="4.905950187916015" />
+      <entry key="S30" value="5.01954153751813" />
+      <entry key="S60" value="6.18749262649708" />
+      <entry key="M2" value="10.945321236035443" />
+      <entry key="M5" value="20.66808431644475" />
+      <entry key="M10" value="26.671703025012636" />
+      <entry key="M15" value="29.15065358450898" />
+      <entry key="M30" value="31.9156379893285" />
+      <entry key="H1" value="33.41566456226869" />
+      <entry key="H2" value="34.19700085411888" />
+      <entry key="H4" value="34.59575506926402" />
+      <entry key="D1" value="34.93224131952706" />
+      <entry key="W1" value="34.990310729203635" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
@@ -121,27 +135,29 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Gradle.Avistock [:com.avistock.Main.main()].executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.Avistock [jar].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Gradle.Avistock [:com.avistock.Main.main()].executor": "Run",
+    "Gradle.Avistock [jar].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "codeWithMe.voiceChat.enabledByDefault": "false",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Avistock [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>

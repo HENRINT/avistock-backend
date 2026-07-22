@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+
+    <persistence-unit name="avistock_db" transaction-type="RESOURCE_LOCAL">
+        <!-- Proveedor de Hibernate para Jakarta -->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Registra aquí tus clases de entidad si es necesario -->
+        <class>com.avistock.model.Usuario</class>
+        <class>com.avistock.model.Cliente</class>
+        <class>com.avistock.model.Apartado</class> <!-- NUEVO: Módulo Cliente -->
+        <class>com.avistock.model.Producto</class><!-- NUEVO: Catálogo de Stock -->
+        <class>com.avistock.model.VentasMostrador</class>
+        <class>com.avistock.model.DetalleVenta</class>
+        <class>com.avistock.model.CierreCaja</class> <!-- NUEVO: faltaba, rompía consultas JPA de cierres de caja -->
+        <class>com.avistock.model.NotificacionCaja</class> <!-- NUEVO: notificaciones persistentes dueño<->cajero -->
+
+        <properties>
+            <!-- Configuración de Conexión a la Base de Datos -->
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/avistock_db?useSSL=false&amp;serverTimezone=UTC"/>
+            <property name="jakarta.persistence.jdbc.user" value="root"/>
+            <property name="jakarta.persistence.jdbc.password" value=""/> <!-- Agrega tu contraseña si usas una -->
+
+            <!-- Propiedades de Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>
