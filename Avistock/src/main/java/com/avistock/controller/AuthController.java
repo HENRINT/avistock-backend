@@ -41,6 +41,20 @@ public class AuthController {
     }
 
     /**
+     * NUEVO: entrega un accessToken nuevo a partir de un refreshToken válido,
+     * sin que el usuario tenga que volver a escribir su contraseña.
+     */
+    public void refresh(Context ctx) {
+        try {
+            Map<String, String> body = ctx.bodyAsClass(Map.class);
+            Object resultado = authService.refrescarToken(body.get("refreshToken"));
+            ctx.status(HttpStatus.OK).json(resultado);
+        } catch (Exception e) {
+            ctx.status(HttpStatus.UNAUTHORIZED).json(Map.of("error", e.getMessage()));
+        }
+    }
+
+    /**
      * Cierre de sesión general y universal para invalidar la sesión HTTP en el servidor.
      */
     public void logout(Context ctx) {

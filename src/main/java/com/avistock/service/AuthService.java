@@ -5,6 +5,9 @@ import com.avistock.model.Cliente;
 import com.avistock.model.Usuario;
 import com.avistock.repository.ClienteRepository;
 import com.avistock.repository.UsuarioRepository;
+import com.avistock.util.JwtUtil;
+import io.jsonwebtoken.Claims;
+import java.util.Map;
 import java.util.Optional;
 
 public class AuthService {
@@ -43,7 +46,14 @@ public class AuthService {
                 u.setContrasena(hashNuevo);
                 usuarioRepository.actualizarContrasena(u.getIdUsuario(), hashNuevo);
             })) {
-                return u;
+                // EXPLICACIÓN: el login ya no regresa solo el objeto Usuario — regresa
+                // el usuario MÁS un par de tokens firmados por este servidor. El
+                // frontend guarda el accessToken y lo manda en cada request futura
+                // (Authorization: Bearer ...); ya no manda su propio id "a mano" en
+                // el header X-User-Id, que cualquiera podía falsificar.
+                String accessToken = JwtUtil.generarAccessToken(u.getIdUsuario(), u.getRol(), u.getCorreo(), "usuario");
+                String refreshToken = JwtUtil.generarRefreshToken(u.getIdUsuario(), "usuario");
+                return Map.of("usuario", u, "token", accessToken, "refreshToken", refreshToken);
             }
         }
 
@@ -55,11 +65,47 @@ public class AuthService {
                 c.setContrasena(hashNuevo);
                 clienteRepository.actualizarContrasena(c.getIdCliente(), hashNuevo);
             })) {
-                return c;
+                String accessToken = JwtUtil.generarAccessToken(c.getIdCliente(), "Cliente", c.getCorreo(), "cliente");
+                String refreshToken = JwtUtil.generarRefreshToken(c.getIdCliente(), "cliente");
+                return Map.of("usuario", c, "token", accessToken, "refreshToken", refreshToken);
             }
         }
 
         throw new RuntimeException("Correo o contraseña incorrectos.");
+    }
+
+    /**
+     * NUEVO: permite pedir un accessToken nuevo usando el refreshToken guardado,
+     * sin que el usuario tenga que volver a escribir su contraseña cada 2 horas.
+     */
+    public Map<String, Object> refrescarToken(String refreshToken) {
+        if (refreshToken == null || refreshToken.isBlank()) {
+            throw new RuntimeException("Falta el refresh token.");
+        }
+        Claims claims;
+        try {
+            claims = JwtUtil.validarToken(refreshToken);
+        } catch (Exception e) {
+            throw new RuntimeException("Refresh token inválido o expirado.");
+        }
+        if (!"refresh".equals(claims.get("tipo", String.class))) {
+            throw new RuntimeException("Este no es un refresh token.");
+        }
+
+        int idCuenta = Integer.parseInt(claims.getSubject());
+        String tipoCuenta = claims.get("tipoCuenta", String.class);
+
+        if ("usuario".equals(tipoCuenta)) {
+            Usuario u = usuarioRepository.buscarPorId(idCuenta)
+                    .orElseThrow(() -> new RuntimeException("Usuario no encontrado."));
+            String nuevoAccess = JwtUtil.generarAccessToken(u.getIdUsuario(), u.getRol(), u.getCorreo(), "usuario");
+            return Map.of("token", nuevoAccess);
+        } else {
+            Cliente c = clienteRepository.buscarPorId(idCuenta)
+                    .orElseThrow(() -> new RuntimeException("Cliente no encontrado."));
+            String nuevoAccess = JwtUtil.generarAccessToken(c.getIdCliente(), "Cliente", c.getCorreo(), "cliente");
+            return Map.of("token", nuevoAccess);
+        }
     }
 
     /**

@@ -29,6 +29,17 @@ public class ClienteRepository {
         }
     }
 
+    // NUEVO: usado por AuthService.refrescarToken() para reconstruir los datos
+    // actuales del cliente a partir del id que viene dentro del refresh token.
+    public Optional<Cliente> buscarPorId(Integer idCliente) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return Optional.ofNullable(em.find(Cliente.class, idCliente));
+        } finally {
+            em.close();
+        }
+    }
+
     public Optional<Cliente> buscarPorCorreo(String correo) {
         if (correo == null || correo.trim().isEmpty()) return Optional.empty();
         EntityManager em = emf.createEntityManager();

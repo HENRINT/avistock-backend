@@ -29,6 +29,17 @@ public class UsuarioRepository {
         }
     }
 
+    // NUEVO: usado por AuthService.refrescarToken() para reconstruir el rol/correo
+    // actuales del usuario a partir del id que viene dentro del refresh token.
+    public Optional<Usuario> buscarPorId(Integer idUsuario) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            return Optional.ofNullable(em.find(Usuario.class, idUsuario));
+        } finally {
+            em.close();
+        }
+    }
+
     // NUEVO: usado para migrar contraseñas viejas en texto plano a hash bcrypt
     // automáticamente la primera vez que el usuario inicia sesión con éxito.
     public void actualizarContrasena(Integer idUsuario, String nuevaContrasenaHasheada) {

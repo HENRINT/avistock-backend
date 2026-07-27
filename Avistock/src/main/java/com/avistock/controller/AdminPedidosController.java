@@ -1,6 +1,7 @@
 package com.avistock.controller;
 
 import io.javalin.http.Context;
+import com.avistock.util.AuthGuard;
 import com.avistock.model.Apartado;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -17,6 +18,12 @@ public class AdminPedidosController {
 
     // 1. GET: Listar apartados con opción de filtrar por estado (?estado=Listo)
     public void obtenerPedidosClientes(Context ctx) {
+        // SEGURIDAD: antes este endpoint no exigia ningun rol ni token -
+        // cualquiera con la URL, sin loguearse, podia leer o modificar estos
+        // datos con curl/Postman. Ahora se exige un JWT valido de Administrador
+        // o Dueno (ambos roles usan esta pantalla).
+        if (!AuthGuard.exigirRol(emf, ctx, "administr", "dueñ", "dueno", "owner")) return;
+
         EntityManager em = emf.createEntityManager();
         try {
             String filtroEstado = ctx.queryParam("estado");
@@ -44,6 +51,12 @@ public class AdminPedidosController {
 
     // 2. PATCH: Cambiar el estado del pedido (Aceptar -> En curso -> Listo)
     public void actualizarEstadoPedido(Context ctx) {
+        // SEGURIDAD: antes este endpoint no exigia ningun rol ni token -
+        // cualquiera con la URL, sin loguearse, podia leer o modificar estos
+        // datos con curl/Postman. Ahora se exige un JWT valido de Administrador
+        // o Dueno (ambos roles usan esta pantalla).
+        if (!AuthGuard.exigirRol(emf, ctx, "administr", "dueñ", "dueno", "owner")) return;
+
         EntityManager em = emf.createEntityManager();
         try {
             Long id = Long.parseLong(ctx.pathParam("id"));

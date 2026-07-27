@@ -1,6 +1,7 @@
 package com.avistock.controller;
 
 import io.javalin.http.Context;
+import com.avistock.util.AuthGuard;
 import com.avistock.model.VentasMostrador;
 import com.avistock.model.DetalleVenta;
 import com.avistock.model.Producto;
@@ -21,6 +22,12 @@ public class AdminVentasController {
 
     // GET: Listar las ventas de HOY (con sus detalles) para la pantalla de Ventas
     public void obtenerVentasHoy(Context ctx) {
+        // SEGURIDAD: antes este endpoint no exigia ningun rol ni token -
+        // cualquiera con la URL, sin loguearse, podia leer o modificar estos
+        // datos con curl/Postman. Ahora se exige un JWT valido de Administrador
+        // o Dueno (ambos roles usan esta pantalla).
+        if (!AuthGuard.exigirRol(emf, ctx, "administr", "dueñ", "dueno", "owner")) return;
+
         EntityManager em = emf.createEntityManager();
         try {
             java.time.LocalDateTime inicioDia = java.time.LocalDate.now().atStartOfDay();
@@ -55,6 +62,12 @@ public class AdminVentasController {
     // em.getReference() para adjuntar una referencia manejada real al Producto existente.
     @SuppressWarnings("unchecked")
     public void registrarVenta(Context ctx) {
+        // SEGURIDAD: antes este endpoint no exigia ningun rol ni token -
+        // cualquiera con la URL, sin loguearse, podia leer o modificar estos
+        // datos con curl/Postman. Ahora se exige un JWT valido de Administrador
+        // o Dueno (ambos roles usan esta pantalla).
+        if (!AuthGuard.exigirRol(emf, ctx, "administr", "dueñ", "dueno", "owner")) return;
+
         EntityManager em = emf.createEntityManager();
         try {
             Map<String, Object> body = ctx.bodyAsClass(Map.class);

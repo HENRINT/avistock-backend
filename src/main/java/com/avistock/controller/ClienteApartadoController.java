@@ -135,24 +135,43 @@ public class ClienteApartadoController {
     }
 
     // 3. DELETE: Cancelar el apartado desde el ticket de éxito
+    // SEGURIDAD: antes cualquiera podía mandar DELETE /api/client/apartados/1,
+    // /2, /3... (con curl o el propio navegador) y borrar la reservación de
+    // OTRA persona, porque solo se validaba que el ID existiera. Los clientes
+    // web no tienen por qué loguearse para apartar, así que en vez de exigir
+    // un JWT aquí, se exige que quien cancela mande el correo o teléfono EXACTO
+    // con el que se creó ese apartado (dato que solo tiene quien hizo la
+    // reservación, ej. desde su ticket de confirmación).
     public void cancelarApartado(Context ctx) {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             Long id = Long.parseLong(ctx.pathParam("id"));
+            String correoConfirmacion = ctx.queryParam("correo");
+            String telefonoConfirmacion = ctx.queryParam("telefono");
 
             tx.begin();
             Apartado apartado = em.find(Apartado.class, id);
 
-            if (apartado != null) {
-                em.remove(apartado); // Elimina el registro de la BD
-                tx.commit();
-                ctx.status(200).json(Map.of("message", "Apartado cancelado exitosamente"));
-            } else {
-                if (tx.isActive()) tx.rollback(); // Cerramos transacción si no se encuentra
+            if (apartado == null) {
+                if (tx.isActive()) tx.rollback();
                 ctx.status(404).json(Map.of("error", "No se encontró el apartado con el ID provisto"));
+                return;
             }
+
+            boolean correoCoincide = correoConfirmacion != null && correoConfirmacion.equalsIgnoreCase(apartado.getCorreo());
+            boolean telefonoCoincide = telefonoConfirmacion != null && telefonoConfirmacion.equals(apartado.getTelefono());
+
+            if (!correoCoincide && !telefonoCoincide) {
+                if (tx.isActive()) tx.rollback();
+                ctx.status(403).json(Map.of("error", "El correo o teléfono no coincide con los datos del apartado."));
+                return;
+            }
+
+            em.remove(apartado); // Elimina el registro de la BD
+            tx.commit();
+            ctx.status(200).json(Map.of("message", "Apartado cancelado exitosamente"));
         } catch (Exception e) {
             if (tx != null && tx.isActive()) {
                 tx.rollback();

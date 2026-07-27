@@ -1,6 +1,7 @@
 package com.avistock.controller;
 
 import io.javalin.http.Context;
+import com.avistock.util.AuthGuard;
 import com.avistock.model.Producto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -30,6 +31,12 @@ public class InventarioController {
      * es el que realmente inserta la fila inicial en la tabla `productos`.
      */
     public void crearProducto(Context ctx) {
+        // SEGURIDAD: antes este endpoint no exigia ningun rol ni token -
+        // cualquiera con la URL, sin loguearse, podia leer o modificar estos
+        // datos con curl/Postman. Ahora se exige un JWT valido de Administrador
+        // o Dueno (ambos roles usan esta pantalla).
+        if (!AuthGuard.exigirRol(emf, ctx, "administr", "dueñ", "dueno", "owner")) return;
+
         EntityManager em = emf.createEntityManager();
         try {
             Map<?, ?> body = ctx.bodyAsClass(Map.class);
@@ -69,6 +76,12 @@ public class InventarioController {
      * 1. GET /api/admin/inventario
      */
     public void obtenerInventarioYResumen(Context ctx) {
+        // SEGURIDAD: antes este endpoint no exigia ningun rol ni token -
+        // cualquiera con la URL, sin loguearse, podia leer o modificar estos
+        // datos con curl/Postman. Ahora se exige un JWT valido de Administrador
+        // o Dueno (ambos roles usan esta pantalla).
+        if (!AuthGuard.exigirRol(emf, ctx, "administr", "dueñ", "dueno", "owner")) return;
+
         EntityManager em = emf.createEntityManager();
         try {
             List<Producto> productos = em.createQuery("SELECT p FROM Producto p", Producto.class).getResultList();
@@ -143,12 +156,29 @@ public class InventarioController {
      * La única entrada real de aves nuevas al negocio es "pollosPie".
      */
     public void agregarRecepcion(Context ctx) {
+        // SEGURIDAD: antes este endpoint no exigia ningun rol ni token -
+        // cualquiera con la URL, sin loguearse, podia leer o modificar estos
+        // datos con curl/Postman. Ahora se exige un JWT valido de Administrador
+        // o Dueno (ambos roles usan esta pantalla).
+        if (!AuthGuard.exigirRol(emf, ctx, "administr", "dueñ", "dueno", "owner")) return;
+
         EntityManager em = emf.createEntityManager();
         try {
             Map<?, ?> body = ctx.bodyAsClass(Map.class);
 
-            int pollosCamara = Integer.parseInt(body.get("pollosCamara").toString());
-            int pollosPie = Integer.parseInt(body.get("pollosPie").toString());
+            // EXPLICACIÓN: antes, si "pollosCamara" o "pollosPie" venían ausentes del
+            // body (null), .toString() lanzaba NullPointerException con mensaje null,
+            // que el catch general convertía en un 400 sin ningún detalle útil
+            // ("Error al procesar recepción: null") — el bug reportado sin poder
+            // diagnosticarse. Ahora se valida antes y se usa 0 como valor por defecto,
+            // igual que ya hacían los demás campos numéricos de este mismo método.
+            int pollosCamara = body.get("pollosCamara") != null ? Integer.parseInt(body.get("pollosCamara").toString()) : 0;
+            int pollosPie = body.get("pollosPie") != null ? Integer.parseInt(body.get("pollosPie").toString()) : 0;
+
+            if (pollosPie == 0 && pollosCamara == 0) {
+                ctx.status(400).json(Map.of("error", "Debes capturar al menos pollos en pie o pollos a cámara."));
+                return;
+            }
 
             // MEJORADO: antes había UN solo precio compartido entre pie y cámara — si
             // recibías ambos en la misma recepción, terminaban con el mismo precio, aunque
@@ -160,7 +190,7 @@ public class InventarioController {
             double precioCamaraKg = body.get("precioCamaraKilo") != null ? Double.parseDouble(body.get("precioCamaraKilo").toString()) : 0;
 
             String pesoAprox = body.get("pesoAprox") != null ? body.get("pesoAprox").toString() : "2.50 kg";
-            int mermasTransporte = Integer.parseInt(body.get("mermasTransporte").toString());
+            int mermasTransporte = body.get("mermasTransporte") != null ? Integer.parseInt(body.get("mermasTransporte").toString()) : 0;
 
             double pesoUnitarioKg = extraerNumero(pesoAprox, 2.50);
 
@@ -256,6 +286,12 @@ public class InventarioController {
      * 3. PATCH /api/admin/inventario/precio
      */
     public void actualizarPrecio(Context ctx) {
+        // SEGURIDAD: antes este endpoint no exigia ningun rol ni token -
+        // cualquiera con la URL, sin loguearse, podia leer o modificar estos
+        // datos con curl/Postman. Ahora se exige un JWT valido de Administrador
+        // o Dueno (ambos roles usan esta pantalla).
+        if (!AuthGuard.exigirRol(emf, ctx, "administr", "dueñ", "dueno", "owner")) return;
+
         EntityManager em = emf.createEntityManager();
         try {
             Map<?, ?> body = ctx.bodyAsClass(Map.class);
@@ -292,6 +328,12 @@ public class InventarioController {
      * 4. POST /api/admin/inventario/merma
      */
     public void registrarMerma(Context ctx) {
+        // SEGURIDAD: antes este endpoint no exigia ningun rol ni token -
+        // cualquiera con la URL, sin loguearse, podia leer o modificar estos
+        // datos con curl/Postman. Ahora se exige un JWT valido de Administrador
+        // o Dueno (ambos roles usan esta pantalla).
+        if (!AuthGuard.exigirRol(emf, ctx, "administr", "dueñ", "dueno", "owner")) return;
+
         EntityManager em = emf.createEntityManager();
         try {
             Map<?, ?> body = ctx.bodyAsClass(Map.class);

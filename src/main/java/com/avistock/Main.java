@@ -111,6 +111,9 @@ public class Main {
         app.post("/api/auth/login", authController::login);
         app.post("/api/auth/registrar-cliente", authController::registrarCliente);
         app.post("/api/auth/logout", authController::logout);
+        // NUEVO: entrega un accessToken nuevo usando el refreshToken guardado en el
+        // frontend, sin que el usuario tenga que volver a escribir su contraseña.
+        app.post("/api/auth/refresh", authController::refresh);
 
         // --- RUTAS DEL MÓDULO DEL DUEÑO: DASHBOARD ---
         app.get("/api/owner/dashboard", dashboardController::getOwnerDashboardData);
@@ -162,6 +165,18 @@ public class Main {
         app.post("/api/admin/inventario/recepcion", inventarioController::agregarRecepcion);
         app.patch("/api/admin/inventario/precio", inventarioController::actualizarPrecio);
         app.post("/api/admin/inventario/merma", inventarioController::registrarMerma);
+
+        // --- MANEJO GLOBAL DE EXCEPCIONES ---
+        // EXPLICACIÓN: sin esto, una excepción no atrapada dentro de un controller
+        // puede dejar la conexión colgada o responder con un stacktrace crudo. Con
+        // esto, SIEMPRE se responde un JSON 500 limpio al cliente y el stacktrace
+        // real se queda en el log del servidor (nunca en la respuesta HTTP, para no
+        // filtrar detalles internos a quien esté probando la API).
+        app.exception(Exception.class, (e, ctx) -> {
+            System.err.println("❌ Excepción no controlada en " + ctx.path() + ": " + e);
+            e.printStackTrace();
+            ctx.status(500).json(Map.of("error", "Error interno del servidor. Intenta de nuevo más tarde."));
+        });
 
         System.out.println("🚀 Servidor Avistock corriendo con éxito en http://localhost:8080");
     }
