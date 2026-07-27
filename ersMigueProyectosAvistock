@@ -1,0 +1,63 @@
+[33mcommit 26f3527929e70c8dbd20936866752bfd602b993b[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: HENRINT <henri.miguel.trejo@gmail.com>
+Date:   Mon Jul 27 15:36:42 2026 -0600
+
+    fix: JWT real, proteger endpoints sin auth, exclude firmas jar, pool HikariCP
+
+ .gitignore                                         | Bin [31m14[m -> [32m34[m bytes
+ .gradle/9.3.0/checksums/checksums.lock             | Bin [31m17[m -> [32m17[m bytes
+ .gradle/9.3.0/checksums/md5-checksums.bin          | Bin [31m18897[m -> [32m19197[m bytes
+ .gradle/9.3.0/checksums/sha1-checksums.bin         | Bin [31m19739[m -> [32m20711[m bytes
+ .../9.3.0/executionHistory/executionHistory.bin    | Bin [31m141114[m -> [32m189096[m bytes
+ .../9.3.0/executionHistory/executionHistory.lock   | Bin [31m17[m -> [32m17[m bytes
+ .gradle/9.3.0/fileHashes/fileHashes.bin            | Bin [31m21697[m -> [32m21797[m bytes
+ .gradle/9.3.0/fileHashes/fileHashes.lock           | Bin [31m17[m -> [32m17[m bytes
+ .gradle/9.3.0/fileHashes/resourceHashesCache.bin   | Bin [31m20435[m -> [32m20707[m bytes
+ .gradle/buildOutputCleanup/buildOutputCleanup.lock | Bin [31m17[m -> [32m17[m bytes
+ .gradle/file-system.probe                          | Bin [31m8[m -> [32m8[m bytes
+ .idea/dataSources.local.xml                        |   1 [32m+[m
+ .idea/dataSources/data_sources_history.xml         |   1 [32m+[m
+ .idea/workspace.xml                                | 159 [32m+++++++++++++[m[31m--------[m
+ Avistock/.env                                      |   3 [32m+[m[31m-[m
+ Avistock/.gitignore                                |   5 [32m+[m
+ Avistock/build.gradle.kts                          |  15 [32m++[m
+ Avistock/src/main/java/com/avistock/Main.java      |  15 [32m++[m
+ .../controller/AdminPedidosController.java         |  13 [32m++[m
+ .../avistock/controller/AdminVentasController.java |  13 [32m++[m
+ .../com/avistock/controller/AuthController.java    |  14 [32m++[m
+ .../controller/ClienteApartadoController.java      |  31 [32m+++[m[31m-[m
+ .../avistock/controller/HistorialController.java   |  13 [32m++[m
+ .../avistock/controller/InventarioController.java  |  48 [32m++++++[m[31m-[m
+ .../com/avistock/repository/ClienteRepository.java |  11 [32m++[m
+ .../com/avistock/repository/UsuarioRepository.java |  11 [32m++[m
+ .../java/com/avistock/service/AuthService.java     |  50 [32m++++++[m[31m-[m
+ .../src/main/java/com/avistock/util/AuthGuard.java |  94 [32m++++++[m[31m------[m
+ .../src/main/java/com/avistock/util/JwtUtil.java   |  75 [32m++++++++++[m
+ .../src/main/resources/META-INF/persistence.xml    |  26 [32m+++[m[31m-[m
+ build.gradle.kts                                   |  15 [32m++[m
+ build/classes/java/main/com/avistock/Main.class    | Bin [31m12240[m -> [32m13335[m bytes
+ .../com/avistock/controller/AuthController.class   | Bin [31m2823[m -> [32m3163[m bytes
+ .../avistock/controller/InventarioController.class | Bin [31m14175[m -> [32m14364[m bytes
+ .../avistock/repository/ClienteRepository.class    | Bin [31m4173[m -> [32m4520[m bytes
+ .../avistock/repository/UsuarioRepository.class    | Bin [31m2802[m -> [32m3149[m bytes
+ .../main/com/avistock/service/AuthService.class    | Bin [31m5292[m -> [32m7687[m bytes
+ .../java/main/com/avistock/util/AuthGuard.class    | Bin [31m3733[m -> [32m3175[m bytes
+ build/libs/Avistock-1.0-SNAPSHOT.jar               | Bin [31m30683473[m -> [32m31449050[m bytes
+ build/reports/problems/problems-report.html        |   2 [32m+[m[31m-[m
+ build/resources/main/META-INF/persistence.xml      |  26 [32m+++[m[31m-[m
+ .../CajaReporteController.class.uniqueId1          | Bin [31m26148[m -> [32m0[m bytes
+ .../tmp/compileJava/previous-compilation-data.bin  | Bin [31m53853[m -> [32m57331[m bytes
+ src/main/java/com/avistock/Main.java               |  15 [32m++[m
+ .../controller/AdminPedidosController.java         |  13 [32m++[m
+ .../avistock/controller/AdminVentasController.java |  13 [32m++[m
+ .../com/avistock/controller/AuthController.java    |  14 [32m++[m
+ .../controller/ClienteApartadoController.java      |  31 [32m+++[m[31m-[m
+ .../avistock/controller/HistorialController.java   |  13 [32m++[m
+ .../avistock/controller/InventarioController.java  |  48 [32m++++++[m[31m-[m
+ .../com/avistock/repository/ClienteRepository.java |  11 [32m++[m
+ .../com/avistock/repository/UsuarioRepository.java |  11 [32m++[m
+ .../java/com/avistock/service/AuthService.java     |  50 [32m++++++[m[31m-[m
+ src/main/java/com/avistock/util/AuthGuard.java     |  94 [32m++++++[m[31m------[m
+ src/main/java/com/avistock/util/JwtUtil.java       |  75 [32m++++++++++[m
+ src/main/resources/META-INF/persistence.xml        |  26 [32m+++[m[31m-[m
+ 56 files changed, 860 insertions(+), 195 deletions(-)

@@ -6,58 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="d868c4d7-6cd8-495a-abff-730ea5ad7227" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/9.3.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/data_sources_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/data_sources_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/.env" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/.env" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/AdminPedidosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/AdminPedidosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/AdminVentasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/AdminVentasController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/ClienteApartadoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/ClienteApartadoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/HistorialController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/HistorialController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/InventarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/controller/InventarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/repository/ClienteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/repository/ClienteRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/repository/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/repository/UsuarioRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/util/AuthGuard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/java/com/avistock/util/AuthGuard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Avistock/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Avistock/src/main/resources/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/avistock/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/avistock/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/avistock/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/avistock/controller/AuthController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/avistock/controller/InventarioController.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/avistock/controller/InventarioController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/avistock/repository/ClienteRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/avistock/repository/ClienteRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/avistock/repository/UsuarioRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/avistock/repository/UsuarioRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/avistock/service/AuthService.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/avistock/service/AuthService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/classes/java/main/com/avistock/util/AuthGuard.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/com/avistock/util/AuthGuard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/libs/Avistock-1.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/build/libs/Avistock-1.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/reports/problems/problems-report.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/reports/problems/problems-report.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/resources/main/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/build/resources/main/META-INF/persistence.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/compileTransaction/stash-dir/CajaReporteController.class.uniqueId1" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/build/tmp/compileJava/previous-compilation-data.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/controller/AdminPedidosController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/controller/AdminPedidosController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/controller/AdminVentasController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/controller/AdminVentasController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/controller/AuthController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/controller/ClienteApartadoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/controller/ClienteApartadoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/controller/HistorialController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/controller/HistorialController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/controller/InventarioController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/controller/InventarioController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/repository/ClienteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/repository/ClienteRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/repository/UsuarioRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/repository/UsuarioRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/avistock/util/AuthGuard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/avistock/util/AuthGuard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/META-INF/persistence.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,20 +64,20 @@
       <entry key="MS100" value="1.0" />
       <entry key="MS500" value="1.0" />
       <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0000003784945426" />
-      <entry key="S10" value="1.002426940687108" />
-      <entry key="S30" value="2.391339554645773" />
-      <entry key="S60" value="10.326512577594848" />
-      <entry key="M2" value="28.815202114616405" />
-      <entry key="M5" value="61.39507141391245" />
-      <entry key="M10" value="82.41073759718513" />
-      <entry key="M15" value="91.49079790333106" />
-      <entry key="M30" value="101.93411054890855" />
-      <entry key="H1" value="107.7459611142635" />
-      <entry key="H2" value="110.81522100424796" />
-      <entry key="H4" value="112.3928462299276" />
-      <entry key="D1" value="113.73006225254004" />
-      <entry key="W1" value="113.96138618345108" />
+      <entry key="S5" value="1.0" />
+      <entry key="S10" value="1.0" />
+      <entry key="S30" value="1.000011904216897" />
+      <entry key="S60" value="1.0212122936981474" />
+      <entry key="M2" value="2.2902103033733523" />
+      <entry key="M5" value="18.76791420555" />
+      <entry key="M10" value="45.51072870359199" />
+      <entry key="M15" value="61.84995883251378" />
+      <entry key="M30" value="84.49109690513068" />
+      <entry key="H1" value="98.93852387949246" />
+      <entry key="H2" value="107.11362081492848" />
+      <entry key="H4" value="111.46399855901983" />
+      <entry key="D1" value="115.23076353929909" />
+      <entry key="W1" value="115.88978031556584" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -150,23 +99,23 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9395227492140118" />
-      <entry key="MS500" value="0.9876008614453725" />
-      <entry key="S2" value="0.9968856972203758" />
-      <entry key="S5" value="0.998753487105606" />
-      <entry key="S10" value="1.0017925968110477" />
-      <entry key="S30" value="2.3897943093935776" />
-      <entry key="S60" value="10.322704924819448" />
-      <entry key="M2" value="28.809915417145664" />
-      <entry key="M5" value="61.390138295959" />
-      <entry key="M10" value="82.4072066784348" />
-      <entry key="M15" value="91.48811696422273" />
-      <entry key="M30" value="101.93257552125495" />
-      <entry key="H1" value="107.74513809174451" />
-      <entry key="H2" value="110.81479465165361" />
-      <entry key="H4" value="112.39262921550447" />
-      <entry key="D1" value="113.73002553919396" />
-      <entry key="W1" value="113.9613809252096" />
+      <entry key="MS100" value="1.2550217610547687E-4" />
+      <entry key="MS500" value="0.1658556425746452" />
+      <entry key="S2" value="0.6381643844144764" />
+      <entry key="S5" value="0.8355511189121639" />
+      <entry key="S10" value="0.9140848532341863" />
+      <entry key="S30" value="0.9705118058309532" />
+      <entry key="S60" value="1.0063410916654765" />
+      <entry key="M2" value="2.2824817354080564" />
+      <entry key="M5" value="18.763409621730823" />
+      <entry key="M10" value="45.50724545386834" />
+      <entry key="M15" value="61.84711278051695" />
+      <entry key="M30" value="84.48930072186265" />
+      <entry key="H1" value="98.93750419010195" />
+      <entry key="H2" value="107.11307618645411" />
+      <entry key="H4" value="111.4637169376398" />
+      <entry key="D1" value="115.23071525464022" />
+      <entry key="W1" value="115.88977338400966" />
     </decayedShown>
   </component>
   <component name="ProjectColorInfo">{
