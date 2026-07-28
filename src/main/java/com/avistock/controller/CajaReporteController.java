@@ -211,6 +211,7 @@ public class CajaReporteController {
                 item.put("mermas", row[5]);
                 item.put("venta_pie", 0.0);
                 item.put("venta_camara", 0.0);
+                item.put("apartados_web", 0.0);
                 listaCierres.add(item);
                 idsCierres.add(idCierre);
             }
@@ -241,6 +242,24 @@ public class CajaReporteController {
                             } else if (nombreLower.contains("pie")) {
                                 item.put("venta_pie", monto);
                             }
+                        }
+                    }
+                }
+            }
+
+            if (!idsCierres.isEmpty()) {
+                String sqlApartadosPorTurno = "SELECT id_cierre, SUM(total_estimado) " +
+                        "FROM apartados WHERE id_cierre IN (:ids) GROUP BY id_cierre";
+                List<Object[]> filasApartados = em.createNativeQuery(sqlApartadosPorTurno)
+                        .setParameter("ids", idsCierres)
+                        .getResultList();
+
+                for (Object[] fila : filasApartados) {
+                    Integer idCierreFila = (Integer) fila[0];
+                    double montoApartados = fila[1] != null ? ((Number) fila[1]).doubleValue() : 0.0;
+                    for (Map<String, Object> item : listaCierres) {
+                        if (item.get("id_cierre").equals(idCierreFila)) {
+                            item.put("apartados_web", montoApartados);
                         }
                     }
                 }

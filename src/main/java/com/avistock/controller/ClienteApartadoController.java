@@ -106,7 +106,16 @@ public class ClienteApartadoController {
             if (cantidadPie > 0) productoPie.setUnidadesDisponibles(productoPie.getUnidadesDisponibles() - cantidadPie);
             if (cantidadCamara > 0) productoCamara.setUnidadesDisponibles(productoCamara.getUnidadesDisponibles() - cantidadCamara);
 
+            Integer idCierreActivo = null;
+            List<Object> filaCierreActivo = em.createNativeQuery(
+                    "SELECT id_cierre FROM cierres_caja WHERE estado_cierre = 'Abierta' LIMIT 1"
+            ).getResultList();
+            if (!filaCierreActivo.isEmpty()) {
+                idCierreActivo = (Integer) filaCierreActivo.get(0);
+            }
+
             Apartado apartado = new Apartado();
+            apartado.setIdCierre(idCierreActivo);
             apartado.setCliente(em.getReference(com.avistock.model.Cliente.class, idCliente));
             apartado.setNombreCompleto(body.get("nombreCompleto") != null ? body.get("nombreCompleto").toString() : null);
             apartado.setTelefono(body.get("telefono") != null ? body.get("telefono").toString() : null);

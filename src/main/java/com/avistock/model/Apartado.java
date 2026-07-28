@@ -12,6 +12,9 @@ public class Apartado {
     @Column(name = "id_apartado")
     private Long idApartado; // Este ID será el número de apartado automático (ej: #4681)
 
+    @Column(name = "id_cierre")
+    private Integer idCierre;
+
     // Relación directa con el Cliente que subiste
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_cliente", nullable = false)
@@ -50,6 +53,9 @@ public class Apartado {
     // Getters y Setters
     public Long getIdApartado() { return idApartado; }
     public void setIdApartado(Long idApartado) { this.idApartado = idApartado; }
+
+    public Integer getIdCierre() { return idCierre; }
+    public void setIdCierre(Integer idCierre) { this.idCierre = idCierre; }
 
     public Cliente getCliente() { return cliente; }
     public void setCliente(Cliente cliente) { this.cliente = cliente; }
