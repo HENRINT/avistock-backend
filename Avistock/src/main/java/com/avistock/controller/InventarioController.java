@@ -98,6 +98,10 @@ public class InventarioController {
                 stockItem.put("precio_kg", "$" + p.getPrecioKg());
                 stockItem.put("precio_kg_num", p.getPrecioKg());
                 stockItem.put("precio_num", p.getPrecioUnidad());
+                // NUEVO: sin esto, la pantalla de Ventas nunca podía sugerir un peso
+                // real basado en inventario — no había forma de saber ni editar
+                // cuánto pesa aproximadamente cada pieza desde la interfaz.
+                stockItem.put("peso_aproximado", p.getPesoAproximado());
                 stockList.add(stockItem);
             }
 
@@ -180,13 +184,9 @@ public class InventarioController {
                 return;
             }
 
-            // MEJORADO: antes había UN solo precio compartido entre pie y cámara — si
-            // recibías ambos en la misma recepción, terminaban con el mismo precio, aunque
-            // cámara normalmente cuesta más por el proceso. Ahora cada uno tiene su propio
-            // precio por unidad y por kg, independientes entre sí.
-            double precioPieUnidad = body.get("precioPieUnidad") != null ? Double.parseDouble(body.get("precioPieUnidad").toString()) : 0;
+            // CORREGIDO: ya no se captura "precio por pollo (unidad)" a mano — solo
+            // existe el precio real por kg. El precio por pieza se deriva solo.
             double precioPieKg = body.get("precioPieKilo") != null ? Double.parseDouble(body.get("precioPieKilo").toString()) : 0;
-            double precioCamaraUnidad = body.get("precioCamaraUnidad") != null ? Double.parseDouble(body.get("precioCamaraUnidad").toString()) : 0;
             double precioCamaraKg = body.get("precioCamaraKilo") != null ? Double.parseDouble(body.get("precioCamaraKilo").toString()) : 0;
 
             String pesoAprox = body.get("pesoAprox") != null ? body.get("pesoAprox").toString() : "2.50 kg";
@@ -195,9 +195,9 @@ public class InventarioController {
             double pesoUnitarioKg = extraerNumero(pesoAprox, 2.50);
 
             // Precio de compra/kg para el registro del lote: usa el precio/kg capturado de
-            // cada producto; si no viene, lo estima dividiendo precio/unidad entre el peso.
-            double precioCompraKiloPie = precioPieKg > 0 ? precioPieKg : ((precioPieUnidad > 0 && pesoUnitarioKg > 0) ? precioPieUnidad / pesoUnitarioKg : 0);
-            double precioCompraKiloCamara = precioCamaraKg > 0 ? precioCamaraKg : ((precioCamaraUnidad > 0 && pesoUnitarioKg > 0) ? precioCamaraUnidad / pesoUnitarioKg : 0);
+            // cada producto.
+            double precioCompraKiloPie = precioPieKg;
+            double precioCompraKiloCamara = precioCamaraKg;
 
             em.getTransaction().begin();
 
@@ -229,8 +229,10 @@ public class InventarioController {
                 int pollosNetosEnPie = Math.max(0, pollosPie - mermasTransporte);
                 productoPie.setUnidadesDisponibles(productoPie.getUnidadesDisponibles() + pollosNetosEnPie);
                 productoPie.setPesoAproximado(pesoAprox);
-                if (precioPieUnidad > 0) productoPie.setPrecioUnidad(precioPieUnidad);
-                if (precioPieKg > 0) productoPie.setPrecioKg(precioPieKg);
+                if (precioPieKg > 0) {
+                    productoPie.setPrecioKg(precioPieKg);
+                    productoPie.setPrecioUnidad(Math.round(precioPieKg * pesoUnitarioKg * 100.0) / 100.0);
+                }
 
                 em.createNativeQuery(sqlInsertLote)
                         .setParameter(1, productoPie.getIdProducto())
@@ -258,8 +260,10 @@ public class InventarioController {
 
                 productoPie.setUnidadesDisponibles(productoPie.getUnidadesDisponibles() - pollosCamara);
                 productoCamara.setUnidadesDisponibles(productoCamara.getUnidadesDisponibles() + pollosCamara);
-                if (precioCamaraUnidad > 0) productoCamara.setPrecioUnidad(precioCamaraUnidad);
-                if (precioCamaraKg > 0) productoCamara.setPrecioKg(precioCamaraKg);
+                if (precioCamaraKg > 0) {
+                    productoCamara.setPrecioKg(precioCamaraKg);
+                    productoCamara.setPrecioUnidad(Math.round(precioCamaraKg * pesoUnitarioKg * 100.0) / 100.0);
+                }
                 productoCamara.setPesoAproximado(pesoAprox);
 
                 em.createNativeQuery(sqlInsertLote)
@@ -296,21 +300,29 @@ public class InventarioController {
         try {
             Map<?, ?> body = ctx.bodyAsClass(Map.class);
             Integer idProducto = Integer.parseInt(body.get("idProducto").toString());
-            double nuevoPrecio = Double.parseDouble(body.get("nuevoPrecio").toString());
-            // NUEVO: antes este endpoint solo aceptaba el precio por unidad; el precio por kg
-            // se quedaba sin forma de actualizarse desde esta pantalla.
-            Double nuevoPrecioKg = body.get("nuevoPrecioKg") != null ? Double.parseDouble(body.get("nuevoPrecioKg").toString()) : null;
+            // CORREGIDO: ya no se captura un "precio por unidad" aparte a mano — solo
+            // existe un precio real (por kg). El precio por pieza se calcula solo,
+            // multiplicando por el peso, para que nunca queden desincronizados.
+            double nuevoPrecioKg = Double.parseDouble(body.get("nuevoPrecioKg").toString());
+            // El peso también es obligatorio aquí porque de él depende el precio por
+            // pieza derivado — sin peso no hay forma de calcular cuánto vale un pollo.
+            String nuevoPeso = body.get("nuevoPeso") != null ? body.get("nuevoPeso").toString().trim() : null;
 
             em.getTransaction().begin();
             Producto producto = em.find(Producto.class, idProducto);
 
             if (producto != null) {
-                producto.setPrecioUnidad(nuevoPrecio);
-                if (nuevoPrecioKg != null) producto.setPrecioKg(nuevoPrecioKg);
+                if (nuevoPeso != null && !nuevoPeso.isEmpty()) {
+                    producto.setPesoAproximado(nuevoPeso + " kg");
+                }
+                producto.setPrecioKg(nuevoPrecioKg);
+                double pesoActualKg = extraerNumero(producto.getPesoAproximado(), 2.50);
+                double precioUnidadDerivado = Math.round(nuevoPrecioKg * pesoActualKg * 100.0) / 100.0;
+                producto.setPrecioUnidad(precioUnidadDerivado);
                 em.getTransaction().commit();
                 ctx.status(200).json(Map.of(
                         "status", "success",
-                        "mensaje", "Precio actualizado: $" + nuevoPrecio + "/ud" + (nuevoPrecioKg != null ? " · $" + nuevoPrecioKg + "/kg" : "")
+                        "mensaje", "Precio actualizado: $" + nuevoPrecioKg + "/kg (≈$" + precioUnidadDerivado + " por pieza)"
                 ));
             } else {
                 em.getTransaction().rollback();
