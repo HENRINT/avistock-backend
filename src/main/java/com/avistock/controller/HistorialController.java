@@ -34,16 +34,12 @@ public class HistorialController {
 
         EntityManager em = emf.createEntityManager();
         try {
-            LocalDateTime inicioDia = LocalDate.now().atStartOfDay();
-            LocalDateTime finDia = LocalDate.now().atTime(23, 59, 59);
-
             List<VentasMostrador> ventas = em.createQuery(
                             "SELECT DISTINCT v FROM VentasMostrador v LEFT JOIN FETCH v.detalles " +
-                                    "WHERE v.fechaHora BETWEEN :inicio AND :fin ORDER BY v.fechaHora DESC",
+                                    "ORDER BY v.fechaHora DESC",
                             VentasMostrador.class
                     )
-                    .setParameter("inicio", inicioDia)
-                    .setParameter("fin", finDia)
+                    .setMaxResults(200)
                     .getResultList();
 
             // Creamos la lista manualmente para evitar problemas de inferencia de tipos con streams
@@ -54,9 +50,11 @@ public class HistorialController {
                         .map(d -> d.getProducto() != null ? d.getProducto().getNombre() + " " + d.getPesoRealKg() + " kg" : "Producto " + d.getPesoRealKg() + " kg")
                         .collect(Collectors.joining(", "));
 
-                String horaFormateada = "00:00 hrs";
+                String horaFormateada = "\u2014";
                 if (v.getFechaHora() != null) {
-                    horaFormateada = v.getFechaHora().toLocalTime().toString().substring(0, 5) + " hrs";
+                    String fecha = v.getFechaHora().toLocalDate().format(java.time.format.DateTimeFormatter.ofPattern("dd/MM"));
+                    String hora = v.getFechaHora().toLocalTime().toString().substring(0, 5);
+                    horaFormateada = fecha + " " + hora + " hrs";
                 }
 
                 Map<String, Object> fila = new HashMap<>();
@@ -97,13 +95,11 @@ public class HistorialController {
 
         EntityManager em = emf.createEntityManager();
         try {
-            LocalDate hoy = LocalDate.now();
-
             List<Apartado> pedidos = em.createQuery(
-                            "SELECT a FROM Apartado a JOIN FETCH a.cliente WHERE a.fechaRegistro = :hoy ORDER BY a.idApartado DESC",
+                            "SELECT a FROM Apartado a JOIN FETCH a.cliente ORDER BY a.idApartado DESC",
                             Apartado.class
                     )
-                    .setParameter("hoy", hoy)
+                    .setMaxResults(200)
                     .getResultList();
 
             List<Map<String, Object>> respuesta = new ArrayList<>();
